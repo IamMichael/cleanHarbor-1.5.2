@@ -81,10 +81,9 @@ function delete_image() {
 
 # 垃圾回收，释放存储空间
 function garbage_collect() {
-  cd ${harbor_install_dir}
-  docker-compose stop
+  docker-compose -f ${harbor_install_dir}/docker-compose.yml stop
   docker run -it --name gc --rm --volumes-from registry vmware/registry-photon:v2.6.2-v1.5.2 garbage-collect  /etc/registry/config.yml
-  docker-compose start
+  docker-compose -f ${harbor_install_dir}/docker-compose.yml start
 }
 
 
