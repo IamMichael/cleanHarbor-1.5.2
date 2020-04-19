@@ -72,7 +72,6 @@ function delete_image() {
   do
     image_name=${n%%:*}
     image_version=${n##*:}
-    i=1
     [[ "${image_name}" == "${image_version}" ]] && { image_version=latest; n="$n:latest"; }
     curl -k -s -u "${auth_user}:${auth_passwd}" -X DELETE -H "Content-Type: application/json" "${registry_url}/api/repositories/${project}%2F${image_name}/tags/${image_version}"
     echo "Deleting ${image_name}:${image_version}"
